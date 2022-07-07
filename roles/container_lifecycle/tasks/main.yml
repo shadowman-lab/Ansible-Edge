@@ -39,7 +39,7 @@
 
     - name: deamon reload systemd and start our service
       ansible.builtin.systemd:
-        name: "afiot-{{service_name}}"
+        name: "afiot-{{ service_name }}"
         state: started
         enabled: true
         daemon_reload: true
@@ -78,7 +78,7 @@
   block:
     - name: stop service
       ansible.builtin.systemd:
-        name: "afiot-{{service_name}}"
+        name: "afiot-{{ service_name }}"
         state: stopped
         enabled: false
 

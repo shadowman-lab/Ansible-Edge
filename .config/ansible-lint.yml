@@ -18,3 +18,5 @@ warn_list:
   - skip_this_tag
   - no-changed-when
   - git-latest
+  - risky-file-permissions
+  - yaml
