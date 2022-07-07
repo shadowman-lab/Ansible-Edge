@@ -11,5 +11,6 @@
     container_extra_params: "--privileged -e GATEWAY_ADMIN_PASSWORD=redhat"
 
   roles:
-    - kiosk_mode
     - container_lifecycle
+    - kiosk_mode
+    
