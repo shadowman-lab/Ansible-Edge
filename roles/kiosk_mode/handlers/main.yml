@@ -1,4 +1,4 @@
 ---
 # handlers file for kiosk_mode
 - name: "reboot"
-  ansible.builtin.reboot:
+  ansible.builtin.shell: "sleep 5 && reboot"
