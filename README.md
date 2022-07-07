@@ -1,3 +1,3 @@
-# Ansible-PAH
-Repo to sync PAH and push new EE
+# Ansible-Edge
+Repo to perform edge demos
 
