@@ -2,6 +2,10 @@
 # tasks file for container_lifecycle
 
 # FIXME: properly handle template config changes
+- name: Ensure podman installed
+  ansible.builtin.dnf:
+    name: podman
+    state: present
 
 - name: Gather information about the current running container
   containers.podman.podman_container_info:
