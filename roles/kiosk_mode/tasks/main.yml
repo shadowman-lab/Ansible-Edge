@@ -11,12 +11,12 @@
       - "@Server With GUI"
     state: present
 
-- name: Create gdm configuration for kiosk kiosk_mode
-  ansible.builtin.template:
-    src: custom.conf
-    dest: /etc/gdm/custom.conf
-    mode: 0644
-  notify: reboot
+#- name: Create gdm configuration for kiosk kiosk_mode
+#  ansible.builtin.template:
+#    src: custom.conf
+#    dest: /etc/gdm/custom.conf
+#    mode: 0644
+#  notify: reboot
 
 - name: Add the user 'kiosk'
   ansible.builtin.user:
@@ -30,18 +30,18 @@
     skeleton: true
   notify: reboot
 
-- name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
-  ansible.builtin.copy:
-    src: files/kiosk.conf.j2
-    dest: /var/lib/AccountsService/users/kiosk
-    mode: 0600
+#- name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
+#  ansible.builtin.copy:
+#    src: files/kiosk.conf.j2
+#    dest: /var/lib/AccountsService/users/kiosk
+#    mode: 0600
 
-- name: Change default target to graphical.target
-  ansible.builtin.file:
-    src: /usr/lib/systemd/system/graphical.target
-    dest: /etc/systemd/system/default.target
-    state: link
-  notify: reboot
+#- name: Change default target to graphical.target
+#  ansible.builtin.file:
+#    src: /usr/lib/systemd/system/graphical.target
+#    dest: /etc/systemd/system/default.target
+#    state: link
+#  notify: reboot
 
 - name: permit traffic in default zone for https service
   ansible.posix.firewalld:
