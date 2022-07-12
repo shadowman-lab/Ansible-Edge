@@ -1,3 +1,0 @@
-- name: display contents
-  ansible.builtin.debug:
-    msg: This is the output of {{ testpassword }}
