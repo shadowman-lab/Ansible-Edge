@@ -1,0 +1,6 @@
+---
+- name: Test Ansible Vault
+  hosts: localhost
+
+  roles:
+    - test_role

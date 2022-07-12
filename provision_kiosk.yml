@@ -13,4 +13,3 @@
   roles:
     - container_lifecycle
     - kiosk_mode
-    
