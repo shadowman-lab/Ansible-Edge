@@ -11,7 +11,6 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 Restart=on-failure
 ExecStartPre=/bin/rm -f %t/afiot-container-{{service_name}}.pid %t/afiot-container-{{service_name}}.ctr-id
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/afiot-container-{{service_name}}.pid --cidfile %t/afiot-container-{{service_name}}.ctr-id --cgroups=no-conmon --replace -d --name afiot-{{service_name}} {% if container_port_mapping is defined %} -p {{container_port_mapping}} {% endif %} {% if container_extra_params is defined %} {{container_extra_params}} {% endif %}  {% if container_healthcheck_cmd is defined %} --health-cmd "{{container_healthcheck_cmd}}" --health-interval {{container_healthcheck_interval}} --health-retries {{container_healthcheck_retries}} {% endif %} {{container_image}}:{{container_tag}}
-ExecStartPost=/usr/bin/nmcli con add type ethernet con-name Ethernet1 ifname enp1s0
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/afiot-container-{{service_name}}.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/afiot-container-{{service_name}}.ctr-id
 PIDFile=%t/afiot-container-{{service_name}}.pid
