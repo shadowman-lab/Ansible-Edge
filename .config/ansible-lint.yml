@@ -20,3 +20,4 @@ warn_list:
   - git-latest
   - risky-file-permissions
   - yaml
+  - jinja[invalid]

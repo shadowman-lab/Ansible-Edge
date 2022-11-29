@@ -1,11 +1,11 @@
 ---
 # Installing sssd first is a workaround for BZ#210960/RHELPLAN-126544
-- name: install sssd
+- name: Install sssd
   ansible.builtin.package:
     name:
       - sssd
 
-- name: install Gnome Desktop Environment
+- name: Install Gnome Desktop Environment
   ansible.builtin.package:
     name:
       - "@Server With GUI"
@@ -16,7 +16,7 @@
     src: custom.conf
     dest: /etc/gdm/custom.conf
     mode: 0644
-  notify: reboot
+  notify: Reboot
 
 - name: Add the user 'kiosk'
   ansible.builtin.user:
@@ -28,9 +28,9 @@
     group: users
     create_home: true
     skeleton: true
-  notify: reboot
+  notify: Reboot
 
-- name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
+- name: Configure session for kiosk username /var/lib/AccountsService/users/kiosk
   ansible.builtin.copy:
     src: files/kiosk.conf.j2
     dest: /var/lib/AccountsService/users/kiosk
@@ -41,48 +41,48 @@
     src: /usr/lib/systemd/system/graphical.target
     dest: /etc/systemd/system/default.target
     state: link
-  notify: reboot
+  notify: Reboot
 
-- name: permit traffic in default zone for https service
+- name: Permit traffic in default zone for https service
   ansible.posix.firewalld:
     service: https
     permanent: true
     state: enabled
 
-- name: install yum install gnome-session-kiosk-session
+- name: Install yum install gnome-session-kiosk-session
   ansible.builtin.yum:
     name: gnome-session-kiosk-session
     state: present
-  notify: reboot
+  notify: Reboot
 
-- name: create directory local bin for kiosk mode
+- name: Create directory local bin for kiosk mode
   ansible.builtin.file:
     path: /home/kiosk/.local/bin
     state: directory
     mode: '0755'
     owner: kiosk
     group: users
-  notify: reboot
+  notify: Reboot
 
-- name: create directory local bin for kiosk mode
+- name: Create directory local bin for kiosk mode
   ansible.builtin.file:
     path: /home/kiosk/Desktop
     state: directory
     mode: '0755'
     owner: kiosk
     group: users
-  notify: reboot
+  notify: Reboot
 
-- name: create config directory to disable welcome screen
+- name: Create config directory to disable welcome screen
   ansible.builtin.file:
     path: /home/kiosk/.config/
     state: directory
     mode: '0755'
     owner: kiosk
     group: users
-  notify: reboot
+  notify: Reboot
 
-- name: create file to disable setup screens
+- name: Create file to disable setup screens
   ansible.builtin.file:
     path: /home/kiosk/.config/gnome-initial-setup-done
     state: touch
@@ -90,14 +90,14 @@
     owner: kiosk
     group: users
 
-- name: create shell script to start firefox
+- name: Create shell script to start firefox
   ansible.builtin.copy:
     dest: /home/kiosk/.local/bin/redhat-kiosk
     src: files/redhat-kiosk.j2
     mode: '0755'
     owner: kiosk
     group: users
-  notify: reboot
+  notify: Reboot
 
 - name: Flush handlers (will reboot if needed)
   ansible.builtin.meta: flush_handlers
