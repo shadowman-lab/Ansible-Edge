@@ -1,6 +1,6 @@
 ---
 - name: Provision kiosk to run podman applications
-  hosts: all
+  hosts: "{{ vm_name | default('all')}}"
   vars:
     systemd_units_dir: "/etc/systemd/system/"
     service_name: "inductive-automation-ignition"
