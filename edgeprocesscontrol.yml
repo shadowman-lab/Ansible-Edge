@@ -1,0 +1,6 @@
+---
+- name: Deploy Ansible Process Control App
+  hosts: "{{ vm_name | default('all')}}"
+
+  roles:
+    - shadowman_edge_simulation
