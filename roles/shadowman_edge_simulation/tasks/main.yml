@@ -52,6 +52,10 @@
     state: enabled
     immediate: true
 
-- name: Print webui
+- name: Print webui for process flow
   ansible.builtin.debug:
-    msg: "http://{{ ipaddr }}:1881"
+    msg: "http://{{ ip_addr }}:1881"
+
+- name: Print webui for dashboard
+  ansible.builtin.debug:
+    msg: "http://{{ ip_addr }}:1881/ui"
