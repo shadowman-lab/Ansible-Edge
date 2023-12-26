@@ -15,7 +15,7 @@
   ansible.builtin.template:
     src: custom.conf
     dest: /etc/gdm/custom.conf
-    mode: 0644
+    mode: "0644"
   notify: Reboot
 
 - name: Add the user 'kiosk'
@@ -34,7 +34,7 @@
   ansible.builtin.copy:
     src: files/kiosk.conf.j2
     dest: /var/lib/AccountsService/users/kiosk
-    mode: 0600
+    mode: "0600"
 
 - name: Change default target to graphical.target
   ansible.builtin.file:
@@ -59,7 +59,7 @@
   ansible.builtin.file:
     path: /home/kiosk/.local/bin
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: kiosk
     group: users
   notify: Reboot
@@ -68,7 +68,7 @@
   ansible.builtin.file:
     path: /home/kiosk/Desktop
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: kiosk
     group: users
   notify: Reboot
@@ -77,7 +77,7 @@
   ansible.builtin.file:
     path: /home/kiosk/.config/
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: kiosk
     group: users
   notify: Reboot
@@ -86,7 +86,7 @@
   ansible.builtin.file:
     path: /home/kiosk/.config/gnome-initial-setup-done
     state: touch
-    mode: '0755'
+    mode: "0755"
     owner: kiosk
     group: users
 
@@ -94,7 +94,7 @@
   ansible.builtin.copy:
     dest: /home/kiosk/.local/bin/redhat-kiosk
     src: files/redhat-kiosk.j2
-    mode: '0755'
+    mode: "0755"
     owner: kiosk
     group: users
   notify: Reboot

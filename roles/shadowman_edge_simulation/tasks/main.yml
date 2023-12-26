@@ -1,5 +1,4 @@
 ---
-
 - name: Install podman
   ansible.builtin.dnf:
     name: podman
@@ -25,16 +24,16 @@
   ansible.builtin.shell:
     cmd: loginctl enable-linger {{ ansible_user }}
   args:
-    creates: "/var/lib/systemd/linger/{{ ansible_user }}"
+    creates: /var/lib/systemd/linger/{{ ansible_user }}
 
 - name: Push out yaml
   ansible.builtin.template:
     src: templates/process-control.yml.j2
-    dest: "/home/{{ ansible_user }}/process-control.yml"
+    dest: /home/{{ ansible_user }}/process-control.yml
 
 - name: Podman play kube
   containers.podman.podman_play:
-    kube_file: "/home/{{ ansible_user }}/process-control.yml"
+    kube_file: /home/{{ ansible_user }}/process-control.yml
     state: started
   register: app_deployed
 
@@ -54,8 +53,8 @@
 
 - name: Print webui for process flow
   ansible.builtin.debug:
-    msg: "http://{{ ip_addr }}:1881"
+    msg: http://{{ ip_addr }}:1881
 
 - name: Print webui for dashboard
   ansible.builtin.debug:
-    msg: "http://{{ ip_addr }}:1881/ui"
+    msg: http://{{ ip_addr }}:1881/ui
